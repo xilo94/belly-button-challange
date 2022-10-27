@@ -1,6 +1,10 @@
+x = []
+
 function buildMetadata(sample){
 d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
+console.log(data)
 
+x = data
 // //Filter the data for the objet with the desired sample number
 let metadata = data.metadata;
 let arrayResults = metadata.filter(sampleobject => sampleobject.id == sample);
@@ -9,7 +13,7 @@ let result = arrayResults [0]
 // //Use d3 to select the panel with id of '#sample-metadata'
 // //use '.htlm("") to clear any existing metadata
 
-let div = d3.select("sample-metadata");
+let div = d3.select("#sample-metadata");
 div.html("")
 Object.entries(result).forEach(([key, value]) => {
     div.append("li").text(`${key} : ${value}`);
@@ -20,15 +24,6 @@ Object.entries(result).forEach(([key, value]) => {
 
 });
 }
-// //Hint: Inside the loop you will need to use d3 to append new
-// // tags for each key-value in the metadata.
-
-
-// //BONUS: Build the Gauge Chart- only do this if you have time
-
-
-// }
-
 
 //  //put the data into a variable- this variable is from the top
 //  //filter the data using 'sample'
@@ -100,11 +95,14 @@ var LayoutBubble = {
 }
  
 
-function init() {
+// function init() {
 
-// // use d3 to selec the dropdown element ($selDataSet)
+// use d3 to selec the dropdown element (#selDataSet)
+//loop throught the same data (from the variable) sampel names
+//append option to the drop-down
 
-let select = d3.select("selDataset");
+
+let select = d3.select("#selDataset");
 
 
 d3.json("samples.json").then((data) => {
@@ -121,46 +119,19 @@ d3.json("samples.json").then((data) => {
     buildCharts(firstSample);
     buildMetadata(firstSample);
   });
-  }
   
-  newSample = d3.select("optionChanged");
+// function optionChanged(newSample){
+//fetch new data each time a row sample is selected
+// run build charts
+//run build MetaData
   function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
   buildCharts(newSample);
   buildMetadata(newSample);
   }
   
-init();
-
-  
-  // Initialize the dashboard
-
-// // slice the data down to 10 items
-// //you will probably want to reverse them to get them into desc order
 
 
-// //create trace, trace will have an x, y and  size 
-
-// //create layout (title is enough)
-
-//     });
-// }
-
-// function init(){
 
 
-// // Use the list of sample names to populate the select options
 
-//       //loop throught the same data (from the variable) sampel names
-//       //append option to the drop-down
-
-//       //use the first sample from the lust to build the intial plots
-//       // run build charts
-//       //run build MetaData
-// }
-
-// function optionChanged(newSample){
-//     //fetch new data each time a row sample is selected
-//     // run build charts
-//     //run build MetaData
-// }
